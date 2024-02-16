@@ -10,6 +10,7 @@ const main = () => {
     //CREATE SPHERE MODEL     we using default values for now 
     const earthGeometry = new THREE.SphereGeometry(0.5, 32, 32)
     const earthMaterial = new THREE.MeshPhongMaterial({
+
         wireframe: true
         //textura de malla de momento
         // well set a propper texture here later
@@ -28,7 +29,7 @@ const main = () => {
     lightSource.position.set(10, 3, 5)
     scene.add(lightSource)
 
-    //TAKES VALUES => FOV, ASPECT RATIO, POSITION
+    //TAKES VALUES => FOV, ASPECT RATIO, CLIPPING PLANES, POSITION
     const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000)
     //  camera.position.x = 2
     // camera.position.y = 2
