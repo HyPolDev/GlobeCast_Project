@@ -1,6 +1,12 @@
 body {
     margin: 0;
     padding: 0;
+    height: 100vh;
+    width: 100vw;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
 }
 
 #globe {
@@ -8,4 +14,32 @@ body {
     top: 0;
     left: 0;
 
+}
+
+.container {
+    z-index: 1;
+    position: absolute;
+    margin: 1em;
+    border-radius: 1em;
+    height: 30vh;
+    width: 30vw;
+    background-color: dimgray;
+
+
+}
+
+#input {
+    background-color: antiquewhite;
+    padding: 1em;
+    margin: 1em;
+    font-size: medium;
+    border-radius: 1em;
+
+
+}
+
+#infoWeather {
+    padding: 1em;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bolder;
 }
