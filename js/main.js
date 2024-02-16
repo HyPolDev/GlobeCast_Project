@@ -1,4 +1,24 @@
 console.log("THREE INIT FINE ON MAIN.JS...")
+let targetRotationX = 0.05
+let targetRotationY = 0.02
+let mouseX, mouseXOnMouseDown, mouseY, mouseYOnMouseDown = 0 //lol
+const windowHalfX = window.innerWidth / 2
+const windowHalfY = window.innerHeight / 2
+const dragFactor = 0.0002
+
+const onDocumentMouseMove = (event) => {
+    mouseX = event.clientX - windowHalfX
+    mouseY = event.clientY - windowHalfY
+    targetRotationX = (mouseX - mouseXOnMouseDown) * dragFactor
+    targetRotationY = (mouseY - mouseYOnMouseDown) * dragFactor
+}
+
+const onDocumentMouseDown = (event) => {
+    event.preventDefault()
+    document.addEventListener("mousemove", onDocumentMouseMove, false);
+    mouseXOnMouseDown = event.clientX - windowHalfX
+    mouseYOnMouseDown = event.clientY - windowHalfY
+}
 
 const main = () => {
     //THREE JS ALWAYS NEEDS A CAMERA, A LIGHT SOURCE AND A CANVAS TO DISPLAY THE MODEL ON
@@ -49,6 +69,7 @@ const main = () => {
     }
 
     animate()
+    document.addEventListener("mousedown", onDocumentMouseDown, false)
 }
 
 window.onload = main
