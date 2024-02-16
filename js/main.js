@@ -10,9 +10,12 @@ const main = () => {
     //CREATE SPHERE MODEL     we using default values for now 
     const earthGeometry = new THREE.SphereGeometry(0.5, 32, 32)
     const earthMaterial = new THREE.MeshPhongMaterial({
-        wireframe: true
+        //wireframe: true,
         //textura de malla de momento
         // well set a propper texture here later
+        map: new THREE.TextureLoader().load("../img/earthTexture.jpg"),
+        bumpMap: new THREE.TextureLoader().load("../img/elevationBump.jpg"),
+        bumpScale: 0.02,
     })
 
     // joins a geometry with a material 
