@@ -37,9 +37,6 @@ const main = () => {
     //CREATE SPHERE MODEL     we using default values for now 
     const earthGeometry = new THREE.SphereGeometry(0.5, 32, 32)
     const earthMaterial = new THREE.MeshPhongMaterial({
-        //wireframe: true,
-        //textura de malla de momento
-        // well set a propper texture here later
         map: new THREE.TextureLoader().load("../img/earthTexture.jpg"),
         bumpMap: new THREE.TextureLoader().load("../img/elevationBump.jpg"),
         bumpScale: 0.02,
@@ -65,9 +62,9 @@ const main = () => {
     camera.position.z = 2
 
     //FOR EACH ANIMATION FRAME RENDERS ->
-    const render = () => {
-        earthMesh.rotateOnWorldAxis(new THREE.Vector3(0, 1, 0), targetRotationX)
-        earthMesh.rotateOnWorldAxis(new THREE.Vector3(1, 0, 0), targetRotationY)
+    const render = () => {                                          // multiply to ajust movement on zoom
+        earthMesh.rotateOnWorldAxis(new THREE.Vector3(0, 1, 0), targetRotationX * (camera.position.z / 3))
+        earthMesh.rotateOnWorldAxis(new THREE.Vector3(1, 0, 0), targetRotationY * (camera.position.z / 3))
         targetRotationY *= slowingFactor
         targetRotationX *= slowingFactor
         renderer.render(scene, camera)
@@ -80,6 +77,33 @@ const main = () => {
 
     animate()
     document.addEventListener("mousedown", onDocumentMouseDown, false)
+
+    // EarthDirection will be and obj and XYZ array required for function
+    let EarthDirection
+    let EarthXYZ
+
+    //gets coordinates on click
+    document.addEventListener("click", () => {
+        //updates Earth direction 
+        EarthDirection = earthMesh.getWorldDirection(new THREE.Vector3())
+        EarthXYZ = [
+            EarthDirection.x,
+            EarthDirection.y,
+            EarthDirection.z
+        ]
+    })
+
+    //ZOOM
+    document.addEventListener("wheel", (e) => {
+        let delta = Math.sign(e.deltaY)
+        if (delta > 0 && camera.position.z < 3) {
+            //camera.position.z = camera.position.z + 0.1
+            camera.translateZ(0.1)
+        }
+        else if (delta < 0 && camera.position.z > 0.7) {
+            camera.position.z = camera.position.z - 0.1
+        }
+    })
 }
 
 window.onload = main
