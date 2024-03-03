@@ -1,3 +1,4 @@
+import * as THREE from '../node_modules/three/src/Three.js'
 console.log("THREE INIT FINE ON MAIN.JS...")
 let targetRotationX = 0.05;
 let targetRotationY = 0.02;
@@ -51,8 +52,8 @@ const main = () => {
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.2)
     scene.add(ambientLight)
 
-    const lightSource = new THREE.PointLight(0xffffff, 0.9)
-    lightSource.position.set(10, 3, 5)
+    const lightSource = new THREE.PointLight(0xffffff, 9)
+    lightSource.position.set(2, 1, 3)
     scene.add(lightSource)
 
     //TAKES VALUES => FOV, ASPECT RATIO, POSITION
@@ -63,7 +64,7 @@ const main = () => {
 
     //FOR EACH ANIMATION FRAME RENDERS ->
     const render = () => {                                          // multiply to ajust movement on zoom
-        earthMesh.rotateOnWorldAxis(new THREE.Vector3(0, 1, 0), targetRotationX * (camera.position.z / 3))
+        earthMesh.rotateOnAxis(new THREE.Vector3(0, 1, 0), targetRotationX * (camera.position.z / 3))
         earthMesh.rotateOnWorldAxis(new THREE.Vector3(1, 0, 0), targetRotationY * (camera.position.z / 3))
         targetRotationY *= slowingFactor
         targetRotationX *= slowingFactor
