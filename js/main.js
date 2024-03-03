@@ -1,3 +1,4 @@
+import * as THREE from '../node_modules/three/src/Three.js'
 console.log("THREE INIT FINE ON MAIN.JS...")
 let targetRotationX = 0.05;
 let targetRotationY = 0.02;
